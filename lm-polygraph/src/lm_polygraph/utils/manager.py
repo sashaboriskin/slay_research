@@ -395,7 +395,7 @@ class UEManager:
                 self.gen_metrics[generation_metric.level, str(generation_metric)] += m
                 batch_gen_metrics[generation_metric.level, str(generation_metric)] += m
 
-            for key in ["greedy_texts", "greedy_tokens"]:
+            for key in ["greedy_texts", "greedy_tokens", "sample_texts"]:
                 if key in batch_stats.keys():
                     self.stats[key] += batch_stats[key]
             for processor in self.processors:

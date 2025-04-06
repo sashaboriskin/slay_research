@@ -91,7 +91,8 @@ def estimate_uncertainty(
     )
     man()
     ue = man.estimations[estimator.level, str(estimator)]
-    texts = man.stats.get("greedy_texts", None)
+    # texts = man.stats.get("greedy_texts", None)
+    texts = man.stats.get("sample_texts", None)
     tokens = man.stats.get("greedy_tokens", None)
     if tokens is not None and len(tokens) > 0:
         # Remove last token, which is the end of the sequence token

@@ -128,7 +128,7 @@ class SamplingGenerationCalculator(StatCalculator):
             "sample_embeddings",
         ], []
 
-    def __init__(self, samples_n: int = 10):
+    def __init__(self, samples_n: int = 5):
         super().__init__()
         self.samples_n = samples_n
 
