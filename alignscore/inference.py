@@ -1,5 +1,6 @@
 from logging import warning
 import spacy
+import nltk
 from nltk.tokenize import sent_tokenize
 import torch
 from .model import BERTAlignModel
@@ -11,7 +12,7 @@ class Inferencer():
     def __init__(self, ckpt_path, model='bert-base-uncased', batch_size=32, device='cuda', verbose=True) -> None:
         self.device = device
         if ckpt_path is not None:
-            self.model = BERTAlignModel(model=model).load_from_checkpoint(checkpoint_path=ckpt_path, strict=False).to(self.device)
+            self.model = BERTAlignModel.load_from_checkpoint(checkpoint_path=ckpt_path, strict=False, model=model).to(self.device)
         else:
             warning('loading UNTRAINED model!')
             self.model = BERTAlignModel(model=model).to(self.device)
@@ -21,6 +22,8 @@ class Inferencer():
         self.config = AutoConfig.from_pretrained(model)
         self.tokenizer = AutoTokenizer.from_pretrained(model)
         self.spacy = spacy.load('en_core_web_sm')
+        nltk.download('punkt_tab')
+
 
         self.loss_fct = nn.CrossEntropyLoss(reduction='none')
         self.softmax = nn.Softmax(dim=-1)
