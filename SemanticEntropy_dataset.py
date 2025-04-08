@@ -14,7 +14,7 @@ base_model.eval()
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 tokenizer.pad_token = tokenizer.eos_token
-df = pd.read_csv('data/SemanticEntropy_dataset.csv')
+df = pd.read_csv('data/adaptive_rag_datasets.csv')
 
 generation_parameters = GenerationParameters(
     temperature=0.5,
@@ -43,4 +43,4 @@ for _, row in tqdm(df.iterrows(), total=len(df)):
 
 df['answer'] = answers
 df['SemanticEntropy'] = uncertainties
-df.to_csv('data/SemanticEntropy_dataset.csv')
+df.to_csv('data/SemanticEntropy_dataset.csv', index=False)
